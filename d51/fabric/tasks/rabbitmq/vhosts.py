@@ -5,13 +5,13 @@ from fabric.decorators import task
 
 __all__ = ["add", "delete", "list"]
 
-def add(user, password):
-    ctl("add_host %s %s" % (user, password))
+def add(host_name):
+    ctl("add_vhost %s" % host_name)
 
-def delete(user):
-    ctl("delete_host %s" % user)
+def delete(host_name):
+    ctl("delete_vhost %s" % host_name)
 
 def list():
-    ctl("list_hosts")
+    ctl("list_vhosts")
 
 
