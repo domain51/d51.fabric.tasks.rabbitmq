@@ -48,6 +48,9 @@ def status():
 def rotate_logs(suffix=None):
     ctl("rotate_logs %s" % suffix)
 
+def start_server():
+    sudo("rabbitmq-server -detached")
+
 from d51.fabric.tasks.rabbitmq import users
 from d51.fabric.tasks.rabbitmq import vhosts
 from d51.fabric.tasks.rabbitmq import permissions
