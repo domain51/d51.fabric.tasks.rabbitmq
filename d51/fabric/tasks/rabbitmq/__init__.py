@@ -13,9 +13,12 @@ DEBIAN_FILE = "rabbitmq-server_%s-1_all.deb" % RABBITMQ_VERSION
 DEBIAN_URL = "http://www.rabbitmq.com/releases/rabbitmq-server/v%s/%s" % (RABBITMQ_VERSION, DEBIAN_FILE)
 
 
-def install(url=DEBIAN_URL, file=DEBIAN_FILE, build_deps_for=RABBITMQ_PACKAGE_NAME):
+
+def install(url=DEBIAN_URL, file=DEBIAN_FILE, build_deps_for=RABBITMQ_PACKAGE_NAME, for_karmic=True):
     sudo("if [ ! -f %s ]; then wget %s; fi;" % (file, url))
     sudo("apt-get build-dep -y %s" % build_deps_for)
+    if for_karmic:
+        sudo("apt-get -f install")
     sudo("dpkg --install %s" % file)
 
 def ctl(cmd, rabbitmqctl=RABBITMQCTL):
